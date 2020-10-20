@@ -1,0 +1,35 @@
+﻿<Window x:Class="MathGame.FinalScore"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathGame"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Title="FinalScore" Height="477.446" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="38*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="800" Background="#FFFBFBFB" Grid.ColumnSpan="2" Margin="0,0,-8,-4">
+            <Canvas x:Name="CanvasCornerImage" Height="181" Canvas.Left="457" Canvas.Top="269" Width="343">
+                <Canvas.Background>
+                    <ImageBrush ImageSource="basketball_hoop.png"/>
+                </Canvas.Background>
+            </Canvas>
+            <Label x:Name="finalscore" Content="Final Score" Canvas.Left="243" Canvas.Top="24" Width="200" FontSize="18" FontFamily="Wide Latin" FontWeight="Bold"/>
+            <Label x:Name="Player" Content="Player:" Canvas.Left="64" Canvas.Top="90" Width="77" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="Player_Copy" Content="Correct:" Canvas.Left="296" Canvas.Top="90" Width="77" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="Player_Copy1" Content="Incorrect:" Canvas.Left="480" Canvas.Top="90" Width="99" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="LbPlayer" Content="Sam 7" Canvas.Left="64" Canvas.Top="141" Width="178" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Label x:Name="LbCorrect" Content="5" Canvas.Left="330" Canvas.Top="141" Width="43" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Label x:Name="LbIncorrect" Content="5" Canvas.Left="536" Canvas.Top="141" Width="43" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Label x:Name="timer" Content="Time:" Canvas.Left="64" Canvas.Top="224" Width="77" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="LbTime" Content="5" Canvas.Left="177" Canvas.Top="224" Width="65" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Button x:Name="home" Content="Return Home" Canvas.Left="33" Canvas.Top="403" Width="108" Click="home_Click"/>
+
+        </Canvas>
+
+    </Grid>
+</Window>

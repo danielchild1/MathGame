@@ -1,0 +1,102 @@
+ Title="gamePage" Background="Black" Width="598.029">
+    <Canvas HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="598">
+        <Label x:Name="NumberCorrect" Content="Correct:" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Verdana" FontSize="16" Canvas.Left="102" Canvas.Top="31"/>
+        <Canvas Height="67" Canvas.Left="102" Canvas.Top="65" Width="82" Background="#FF898484">
+            <Label x:Name="LbCorrect" Content="00" Height="67" Width="82" FontFamily="Stencil" FontSize="59" FontWeight="Bold" Foreground="#FF21F500"/>
+        </Canvas>
+        <Canvas Height="67" Canvas.Left="377" Canvas.Top="65" Width="82" Background="#FF898484">
+            <Label x:Name="LbIncorrect" Content="00" Height="67" Width="82" FontFamily="Stencil" FontSize="59" FontWeight="Bold" Foreground="#FFF70A0A"/>
+        </Canvas>
+        <Label Content="Incorrect:" Canvas.Left="377" Canvas.Top="33" Width="93" Background="{x:Null}" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Verdana" FontSize="14" Height="29"/>
+        <Canvas Height="50" Canvas.Left="249" Canvas.Top="169" Width="56" Background="#FF898484">
+            <Label x:Name="LbQl" Content="10" Height="50" Width="56" FontFamily="Stencil" FontSize="38" FontWeight="Bold" Foreground="#FFEC9C28" Background="{x:Null}"/>
+        </Canvas>
+        <Label x:Name="QuestionsLeft" Content="Questions Left:" Canvas.Left="229" Canvas.Top="146" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Verdana" FontSize="11"/>
+        <Canvas Height="100" Canvas.Left="112" Canvas.Top="245" Width="341" Background="#FFACACAC">
+            <Label x:Name="LbMathProblem" Content="2 + 1 =" Canvas.Left="20" Canvas.Top="31" Width="108" FontFamily="Trebuchet MS" FontSize="24" FontWeight="Bold"/>
+            <TextBox x:Name="TbAnswer" Height="30" Canvas.Left="119" TextWrapping="Wrap" Text="120" Canvas.Top="35" Width="51" FontSize="24" FontFamily="Trebuchet MS"/>
+            <Button x:Name="BtNext" Content="Next" Canvas.Left="196" Canvas.Top="35" Width="76" Height="30" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="20" Click="BtNext_Click"/>
+        </Canvas>
+        <Canvas Height="110" Canvas.Left="469" Canvas.Top="307" Width="109">
+            <Canvas.Background>
+                <ImageBrush ImageSource="basketBall.png"/>
+            </Canvas.Background>
+        </Canvas>
+        <Button x:Name="BtStartz" Content="Start Game" Canvas.Left="52" Canvas.Top="168" Width="119" Height="51" Background="#FF143CEE" Foreground="#FFF7F7F7" FontWeight="Bold" FontSize="18" Click="BtStart_Click"/>
+        <Label x:Name="timer" Content="Time:" Canvas.Left="240" Canvas.Top="33" Width="93" Background="{x:Null}" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Verdana" FontSize="14" Height="29"/>
+        <Canvas Height="67" Canvas.Left="229" Canvas.Top="65" Width="113" Background="#FF898484">
+            <Label x:Name="LbTimerz" Content="0" Height="67" Width="113" FontFamily="Stencil" FontSize="59" FontWeight="Bold" Foreground="#FFEC9C28" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        </Canvas>
+    </Canvas>
+
+ public partial class gamePage : Page
+    {
+        private game Game;
+        private readonly DispatcherTimer dispatcherTimer;
+        public gamePage()
+        { 
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            Game = new game();
+            InitializeComponent();
+        }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            LbTimerz.Content = Game.updateTime().ToString();
+        }
+
+        private void BtNext_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Game.checkAnswer(Int32.Parse(TbAnswer.Text));
+            }
+            catch (FormatException)
+            {
+                Game.checkAnswer(0);
+            }
+
+            LbMathProblem.Content = Game.equasion();
+            LbCorrect.Content = Game.getCorrectScore();
+            LbIncorrect.Content = Game.getIncorrectScore();
+            LbQl.Content = Game.getNumQuestions();
+        }
+
+        private void BtStartz_Click(object sender, RoutedEventArgs e)
+        {
+            dispatcherTimer.Start();
+             BtStartz.IsVisible = false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
+    }
+
+
+
+///Final Score Page
+
+<Grid>
+        <Canvas HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="800" Background="#FFFBFBFB">
+            <Canvas Height="181" Canvas.Left="457" Canvas.Top="269" Width="343">
+                <Canvas.Background>
+                    <ImageBrush ImageSource="basketball_hoop.png"/>
+                </Canvas.Background>
+            </Canvas>
+            <Label x:Name="finalscore" Content="Final Score" Canvas.Left="243" Canvas.Top="24" Width="200" FontSize="18" FontFamily="Wide Latin" FontWeight="Bold"/>
+            <Label x:Name="Player" Content="Player:" Canvas.Left="64" Canvas.Top="90" Width="77" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="Player_Copy" Content="Correct:" Canvas.Left="296" Canvas.Top="90" Width="77" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="Player_Copy1" Content="Incorrect:" Canvas.Left="480" Canvas.Top="90" Width="99" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="LbPlayer" Content="Sam 7" Canvas.Left="64" Canvas.Top="141" Width="178" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Label x:Name="LbCorrect" Content="5" Canvas.Left="330" Canvas.Top="141" Width="43" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Label x:Name="LbIncorrect" Content="5" Canvas.Left="536" Canvas.Top="141" Width="43" FontSize="16" FontFamily="Segoe UI Historic"/>
+            <Label x:Name="timer" Content="Time:" Canvas.Left="64" Canvas.Top="224" Width="77" FontSize="16" FontFamily="Segoe UI Black"/>
+            <Label x:Name="LbTime" Content="5" Canvas.Left="177" Canvas.Top="224" Width="65" FontSize="16" FontFamily="Segoe UI Historic"/>
+
+        </Canvas>
+
+    </Grid>
